@@ -40,21 +40,21 @@ function playGame(player1, player2, playUntil) {
   var player2Score = 0;
   var gameNum = 0
 
+  function rps(){
+    var hands = ['rock', 'paper', 'scissors']
+    return hands[parseInt(Math.random()*10)%3]
+  }
+
   var play = function(){
-      var hands = ['rock', 'paper', 'scissors']
 
       var player1 = {
         name: player1,
-        getHands: function() {
-          return hands[parseInt(Math.random()*10)%3]
-        }
+        getHands: rps
       }
 
       var player2 = {
         name: player2,
-        getHands: function() {
-          return hands[parseInt(Math.random()*10)%3]
-        }
+        getHands: rps
       }
 
       var winner = compareChoices(player1, player2);
