@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My First Javascript Page</title>
+  </head>
+  <body>
+    <h1 id="greeting">Hello javascript world</h1>
+    <p id="example">Lorem ipsum dolor sit amet <br />Yep! Thats random</p>
+    <button type="button" onclick="modifyColor()">Click Me</button>
+
+    <button type="button" onclick="alert(Math.floor(Math.random() * (7-1)) +1)">Click Me for Math</button>
+
+    <script>
+      function modifyColor() {
+        document.getElementById('example').style.color = "aqua";
+        document.getElementById('example').style.backgroundColor = 'gray';
+      }
+    </script>
+    <!-- <script type="text/javascript" src='main.js'>
+
+    </script> -->
+  </body>
+</html>
