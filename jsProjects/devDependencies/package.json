@@ -1,0 +1,23 @@
+{
+  "name": "proj2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "_comment": "comment text goes here...",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "mocha": "^3.3.0"
+  }
+}
