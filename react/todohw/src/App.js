@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TodosList from './todoslist.js';
 import Filters from './filters.js';
+import TodoSubmit from './TodoSubmit.js';
 import './App.css';
 
 class App extends Component {
@@ -8,21 +9,67 @@ class App extends Component {
     super(props);
 
     this.state = {
+      newTodoInput: '',
       filter: 'active',
+      editingTodo: null,
       todos: [{
         id: 0,
         desc: 'Create React App',
-        status: 'active'
+        status: 'active',
+        edited: false,
       },{
         id: 1,
         desc: 'Create State',
-        status: 'active'
+        status: 'active',
+        edited: false,
       },{
         id: 2,
         desc: 'Create Components',
-        status: 'active'
+        status: 'active',
+        edited: false,
       }]
     }
+  }
+
+  addNewTodo = desc => {
+    let todos = this.state.todos;
+
+    const newTodo = {
+      id: todos.length + 1,
+      desc: desc,
+      status: 'active',
+      edited: false,
+    };
+
+    todos = todos.concat([newTodo])
+    this.setState({
+      todos: todos,
+      newTodoInput: ''
+    })
+  }
+
+  editTodo = todoObj => {
+    this.setState({editingTodo: todoObj});
+    this.changeTodoVal(todoObj.desc);
+  }
+
+  changeTodoVal = newVal => {
+    this.setState({newTodoInput: newVal})
+  }
+
+  updateTodo = () => {
+    let id = this.state.editingTodo.id;
+    let todos = this.state.todos;
+    let newDesc = this.state.newTodoInput;
+    let index = todos.map(todo => todo.id).indexOf(id);
+
+    todos[index].desc = newDesc;
+    todos[index].edited = true;
+    this.setState({
+      todos: todos,
+      editingTodo: null,
+      newTodoInput: ''
+    })
   }
 
   changeFilter = newFilter => {
@@ -43,7 +90,7 @@ class App extends Component {
   }
 
   render() {
-    const { todos, filter } = this.state;
+    const { todos, filter, newTodoInput, editingTodo } = this.state;
     const filterOptions = ['active', 'complete'];
 
     return (
@@ -52,11 +99,19 @@ class App extends Component {
           todos={todos}
           activeFilter={filter}
           changeStatus={this.changeStatus}
+          editTodo={this.editTodo}
         />
         <Filters
           filterOptions={filterOptions}
           activeFilter={filter}
           changeFilter={this.changeFilter}
+        />
+        <TodoSubmit
+          newTodoInput={newTodoInput}
+          editingTodo={editingTodo}
+          changeTodoVal={this.changeTodoVal}
+          addNewTodo={this.addNewTodo}
+          updateTodo={this.updateTodo}
         />
       </div>
     );
